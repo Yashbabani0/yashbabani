@@ -1,5 +1,57 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  @media (prefers-reduced-motion: no-preference) {
+    body,
+    body * {
+      transition-property: background-color, color, border-color, fill, stroke;
+      transition-duration: 500ms;
+      transition-timing-function: ease-in-out;
+    }
+  }
+}
+
+/* Crossfade complete theme snapshots, including images and utility colors. */
+html[data-theme-transition]::view-transition-old(root),
+html[data-theme-transition]::view-transition-new(root) {
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+}
+
+/* The new snapshot must contain final colors, not an in-progress CSS fade. */
+html[data-theme-transition] *,
+html[data-theme-transition] *::before,
+html[data-theme-transition] *::after {
+  transition: none !important;
+}
+
+@keyframes navbar-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navbar-enter {
+    animation: navbar-enter 350ms ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  header *,
+  header *::before,
+  header *::after {
+    transition-duration: 0s !important;
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,11 +64,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 
 body {
