@@ -16,7 +16,8 @@ const navItems = [
 
 const MotionLink = motion.create(Link);
 
-export default function Navbar({ githubUri }: { githubUri?: string }) {
+export default function Navbar() {
+  const githubUri = process.env.NEXT_PUBLIC_GITHUB_URI;
   const pathname = usePathname();
 
   return (
