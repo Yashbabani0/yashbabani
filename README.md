@@ -2,6 +2,18 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### Admin access
+
+Clerk handles sign-in. Set `CLERK_ADMIN_USER_ID` in `.env.local` and your hosting
+environment to the owner's Clerk user ID (`user_...`). Keep this variable private;
+do not prefix it with `NEXT_PUBLIC_`.
+
+`/admin` and its nested routes redirect signed-out visitors to sign-in and reject
+other signed-in accounts. Missing owner configuration denies access to everyone.
+The admin page also calls `requireAdmin()` from `lib/auth/admin.ts` on the server.
+Call this guard in new admin pages and before any future protected data access or
+Server Actions. Database/API integration is not implemented yet.
+
 First, run the development server:
 
 ```bash
