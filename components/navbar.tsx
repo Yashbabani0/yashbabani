@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { LayoutGroup, motion, MotionConfig } from "motion/react";
 import { FaGithub } from "react-icons/fa6";
 import ThemeToggle from "@/components/theme-toggle";
+import { githubUri } from "@/lib/social-links";
 
 const navItems = [
   { label: "Projects", href: "/projects" },
@@ -17,7 +18,6 @@ const navItems = [
 const MotionLink = motion.create(Link);
 
 export default function Navbar() {
-  const githubUri = process.env.NEXT_PUBLIC_GITHUB_URI;
   const pathname = usePathname();
 
   return (
