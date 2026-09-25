@@ -10,9 +10,9 @@ import { githubUri } from "@/lib/social-links";
 const navItems = [
   { label: "Projects", href: "/projects" },
   { label: "Games", href: "/games" },
-  { label: "About", href: "/about" },
+  { label: "About", href: "/#about" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const MotionLink = motion.create(Link);
@@ -25,7 +25,7 @@ export default function Navbar() {
       reducedMotion="user"
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
-      <header className="navbar-enter sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/70">
+      <header className="navbar-enter sticky top-0 z-50 shrink-0 border-b border-black/5 bg-white/80 backdrop-blur-md dark:border-white/10 dark:bg-black/70">
         <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
           <MotionLink
             href="/"

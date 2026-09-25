@@ -1,12 +1,13 @@
-import Link from "next/link";
+import Link from "@/components/motion/animated-link";
+import Reveal from "@/components/motion/reveal";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 import { emailUri, githubUri, xUri } from "@/lib/social-links";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-black/5 dark:border-white/10">
-      <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 text-sm text-neutral-500 md:flex-row md:items-center md:justify-between">
+    <footer className="mt-auto shrink-0 border-t border-black/5 dark:border-white/10">
+      <Reveal className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-6 text-sm text-neutral-500 md:flex-row md:items-center md:justify-between">
         <p>© {new Date().getFullYear()} Yash Babani</p>
 
         <div className="flex items-center gap-5">
@@ -44,7 +45,7 @@ export default function Footer() {
             </Link>
           )}
         </div>
-      </div>
+      </Reveal>
     </footer>
   );
 }

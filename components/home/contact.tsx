@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "@/components/motion/animated-link";
+import Reveal from "@/components/motion/reveal";
 import { FaGithub, FaXTwitter } from "react-icons/fa6";
 import { HiOutlineMail } from "react-icons/hi";
 import { emailUri, githubUri, xUri } from "@/lib/social-links";
@@ -9,7 +10,7 @@ export default function Contact() {
       id="contact"
       className="border-t border-black/5 py-24 dark:border-white/10"
     >
-      <div className="mx-auto max-w-4xl px-6">
+      <Reveal className="mx-auto max-w-6xl px-6">
         <div className="max-w-2xl">
           <p className="mb-3 text-sm font-medium uppercase tracking-widest text-neutral-500">
             Contact
@@ -61,7 +62,7 @@ export default function Contact() {
             )}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
