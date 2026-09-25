@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Link from "@/components/motion/animated-link";
+import Reveal from "@/components/motion/reveal";
 
 const focusItems = [
   {
@@ -20,7 +21,7 @@ export default function Hero() {
     <section className="min-h-[calc(100vh-4rem)]">
       <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl items-center px-6 py-20">
         <div className="w-full">
-          <div className="max-w-4xl">
+          <Reveal className="max-w-4xl">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.2em] text-neutral-500">
               Full-stack developer · Rajkot, India
             </p>
@@ -53,12 +54,13 @@ export default function Hero() {
                 Explore Games
               </Link>
             </div>
-          </div>
+          </Reveal>
 
           <div className="mt-20 grid border-y border-black/5 sm:grid-cols-3 dark:border-white/10">
             {focusItems.map((item, index) => (
-              <div
+              <Reveal
                 key={item.label}
+                delay={0.1 + index * 0.08}
                 className={`py-5 sm:px-6 ${
                   index !== 0
                     ? "border-t border-black/5 sm:border-l sm:border-t-0 dark:border-white/10"
@@ -72,7 +74,7 @@ export default function Hero() {
                 <p className="mt-2 text-sm font-medium text-black dark:text-white">
                   {item.value}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>

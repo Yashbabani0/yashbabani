@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/motion/animated-link";
+import Reveal from "@/components/motion/reveal";
 import { ArrowUpRight } from "lucide-react";
 
 const showGames = true;
@@ -30,7 +31,7 @@ export default function Games() {
       className="border-t border-black/5 py-24 dark:border-white/10"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-medium uppercase tracking-widest text-neutral-500">
               Game Development
@@ -49,56 +50,57 @@ export default function Games() {
               View all games
               <ArrowUpRight
                 size={16}
-                className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                className="transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
               />
             </Link>
           )}
-        </div>
+        </Reveal>
 
         {showGames ? (
           <div className="mt-12 grid gap-5 md:grid-cols-2">
-            {games.map((game) => (
-              <Link
-                key={game.title}
-                href={game.href}
-                className="group overflow-hidden rounded-2xl border border-black/10 dark:border-white/10"
-              >
-                <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-900">
-                  <Image
-                    src={game.image}
-                    alt={`${game.title} preview`}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
-                </div>
-
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-medium uppercase tracking-widest text-neutral-500">
-                        {game.genre}
-                      </p>
-
-                      <h3 className="mt-2 text-xl font-semibold tracking-tight text-black dark:text-white">
-                        {game.title}
-                      </h3>
-                    </div>
-
-                    <ArrowUpRight
-                      size={18}
-                      className="mt-1 shrink-0 text-neutral-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white"
+            {games.map((game, index) => (
+              <Reveal key={game.title} delay={index * 0.08} className="h-full">
+                <Link
+                  href={game.href}
+                  className="group block h-full overflow-hidden rounded-2xl border border-black/10 dark:border-white/10"
+                >
+                  <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+                    <Image
+                      src={game.image}
+                      alt={`${game.title} preview`}
+                      fill
+                      className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.02]"
                     />
                   </div>
 
-                  <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-                    {game.description}
-                  </p>
-                </div>
-              </Link>
+                  <div className="p-6">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <p className="text-xs font-medium uppercase tracking-widest text-neutral-500">
+                          {game.genre}
+                        </p>
+
+                        <h3 className="mt-2 text-xl font-semibold tracking-tight text-black dark:text-white">
+                          {game.title}
+                        </h3>
+                      </div>
+
+                      <ArrowUpRight
+                        size={18}
+                        className="mt-1 shrink-0 text-neutral-400 transition-all motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white"
+                      />
+                    </div>
+
+                    <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                      {game.description}
+                    </p>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         ) : (
-          <div className="mt-12 grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:items-end">
+          <Reveal className="mt-12 grid gap-8 lg:grid-cols-[1.4fr_0.6fr] lg:items-end">
             <div className="max-w-2xl">
               <p className="text-lg leading-8 text-neutral-600 dark:text-neutral-400">
                 I&apos;ve recently started learning game development with Godot
@@ -125,7 +127,7 @@ export default function Games() {
                 ),
               )}
             </div>
-          </div>
+          </Reveal>
         )}
       </div>
     </section>

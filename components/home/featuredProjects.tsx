@@ -1,5 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
+import Link from "@/components/motion/animated-link";
+import Reveal from "@/components/motion/reveal";
 import { ArrowUpRight } from "lucide-react";
 
 const projects = [
@@ -36,7 +37,7 @@ export default function FeaturedProjects() {
       className="border-t border-black/5 py-24 dark:border-white/10"
     >
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <Reveal className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-medium uppercase tracking-widest text-neutral-500">
               Selected Work
@@ -59,59 +60,60 @@ export default function FeaturedProjects() {
             View all projects
             <ArrowUpRight
               size={16}
-              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              className="transition-transform motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5"
             />
           </Link>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {projects.map((project, index) => (
-            <Link
-              key={project.title}
-              href={project.href}
-              className="group overflow-hidden rounded-2xl border border-black/10 dark:border-white/10"
-            >
-              <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
-                <Image
-                  src={project.image}
-                  alt=""
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                />
-
-                <div className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 font-mono text-xs text-neutral-600 backdrop-blur dark:bg-black/80 dark:text-neutral-300">
-                  0{index + 1}
-                </div>
-              </div>
-
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-semibold tracking-tight text-black dark:text-white">
-                    {project.title}
-                  </h3>
-
-                  <ArrowUpRight
-                    size={18}
-                    className="mt-1 shrink-0 text-neutral-400 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white"
+            <Reveal key={project.title} delay={index * 0.08} className="h-full">
+              <Link
+                href={project.href}
+                className="group block h-full overflow-hidden rounded-2xl border border-black/10 dark:border-white/10"
+              >
+                <div className="relative aspect-[16/10] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+                  <Image
+                    src={project.image}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-300 motion-safe:group-hover:scale-[1.02]"
                   />
+
+                  <div className="absolute left-4 top-4 rounded-full bg-white/90 px-2.5 py-1 font-mono text-xs text-neutral-600 backdrop-blur dark:bg-black/80 dark:text-neutral-300">
+                    0{index + 1}
+                  </div>
                 </div>
 
-                <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
-                  {project.description}
-                </p>
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="text-xl font-semibold tracking-tight text-black dark:text-white">
+                      {project.title}
+                    </h3>
 
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {project.stack.map((technology) => (
-                    <span
-                      key={technology}
-                      className="rounded-full border border-black/10 px-2.5 py-1 text-xs text-neutral-500 dark:border-white/10"
-                    >
-                      {technology}
-                    </span>
-                  ))}
+                    <ArrowUpRight
+                      size={18}
+                      className="mt-1 shrink-0 text-neutral-400 transition-all motion-safe:group-hover:-translate-y-0.5 motion-safe:group-hover:translate-x-0.5 group-hover:text-black dark:group-hover:text-white"
+                    />
+                  </div>
+
+                  <p className="mt-3 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((technology) => (
+                      <span
+                        key={technology}
+                        className="rounded-full border border-black/10 px-2.5 py-1 text-xs text-neutral-500 dark:border-white/10"
+                      >
+                        {technology}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>
